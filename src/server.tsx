@@ -1,5 +1,6 @@
 import { createServer, Page } from 'ionbeam';
 import type { Request, Response } from 'express';
+import './global.css';
 
 const app = createServer();
 
