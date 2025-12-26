@@ -11,13 +11,12 @@ export const TodoForm = () => {
         'hx-on::after-request': "if(event.detail.successful) this.reset()"
       }}
     >
-      <input
-        type="text"
+      <textarea
         name="title"
         placeholder="What needs to be done?"
-        className={styles.input}
+        className={styles.textarea}
+        rows={3}
         required
-        autoComplete="off"
       />
       <button type="submit" className={styles.button}>
         Add Todo

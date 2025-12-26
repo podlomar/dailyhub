@@ -1,11 +1,12 @@
 .form {
   display: flex;
+  flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
 
-.input {
-  flex: 1;
+.textarea {
+  width: 100%;
   padding: 0.875rem 1rem;
   background-color: #000000;
   border: none;
@@ -13,14 +14,17 @@
   color: #ffffff;
   font-size: 0.95rem;
   transition: background-color 0.15s ease;
+  resize: none;
+  font-family: inherit;
+  line-height: 1.5;
 }
 
-.input:focus {
+.textarea:focus {
   outline: none;
   background-color: #0a0a0a;
 }
 
-.input::placeholder {
+.textarea::placeholder {
   color: #666;
 }
 
@@ -43,14 +47,4 @@
 
 .button:active {
   transform: scale(0.98);
-}
-
-@media (max-width: 480px) {
-  .form {
-    flex-direction: column;
-  }
-
-  .button {
-    width: 100%;
-  }
 }
