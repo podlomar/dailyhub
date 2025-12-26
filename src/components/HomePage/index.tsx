@@ -1,14 +1,14 @@
 import { Container } from '../Container';
 import { TodoForm } from '../TodoForm';
-import { TodoItem } from '../TodoItem';
-import type { Todo } from '../../db';
+import { TodoSection } from '../TodoSection';
+import type { TodoList } from '../../db';
 import styles from './styles.module.css';
 
 interface Props {
-  todos: Todo[];
+  todoList: TodoList;
 }
 
-export const HomePage = ({ todos }: Props) => {
+export const HomePage = ({ todoList }: Props) => {
   return (
     <Container>
       <header className={styles.header}>
@@ -19,9 +19,11 @@ export const HomePage = ({ todos }: Props) => {
       <TodoForm />
 
       <main id="todo-list" className={styles.todoList}>
-        {todos.map((todo) => (
-          <TodoItem key={todo.id} todo={todo} />
-        ))}
+        <TodoSection title="Today" todos={todoList.today} />
+        <TodoSection title="Last 3 Days" todos={todoList.last3Days} />
+        <TodoSection title="Last Week" todos={todoList.lastWeek} />
+        <TodoSection title="Last Month" todos={todoList.lastMonth} />
+        <TodoSection title="Older" todos={todoList.older} />
       </main>
     </Container>
   );

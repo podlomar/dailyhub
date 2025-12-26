@@ -8,8 +8,8 @@ import './global.css';
 const app = createServer();
 
 app.get('/', async (req: Request, res: Response) => {
-  const todos = await getTodos();
-  await req.ionbeam.renderPage("Daily Hub", <HomePage todos={todos} />);
+  const todoList = await getTodos();
+  await req.ionbeam.renderPage("Daily Hub", <HomePage todoList={todoList} />);
 });
 
 app.post('/todos', async (req: Request, res: Response) => {

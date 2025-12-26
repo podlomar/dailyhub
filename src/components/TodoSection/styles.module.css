@@ -1,0 +1,21 @@
+/* Sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.sectionTodos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
