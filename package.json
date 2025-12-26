@@ -17,9 +17,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "dayjs": "^1.11.19",
     "express": "^5.2.1",
     "ionbeam": "^1.0.0-alpha.5",
-    "lowdb": "^7.0.1"
+    "lowdb": "^7.0.1",
+    "nanoid": "^5.1.6"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
