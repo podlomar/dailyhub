@@ -1,0 +1,51 @@
+.todoItem {
+  background-color: #000000;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.todoItem:hover {
+  border-color: #555;
+  transform: translateY(-1px);
+}
+
+.todoItem.completed {
+  opacity: 0.6;
+}
+
+.todoItem.completed .todoTitle {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todoCheckbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #000;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.todoItem.completed .todoCheckbox {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.todoTitle {
+  font-size: 1.05rem;
+  color: #ffffff;
+  flex: 1;
+}
