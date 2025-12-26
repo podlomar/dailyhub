@@ -1,4 +1,5 @@
 import { Container } from '../Container';
+import { TodoForm } from '../TodoForm';
 import { TodoItem } from '../TodoItem';
 import type { Todo } from '../../db';
 import styles from './styles.module.css';
@@ -15,7 +16,9 @@ export const HomePage = ({ todos }: Props) => {
         <p className={styles.subtitle}>Your everyday tasks</p>
       </header>
 
-      <main className={styles.todoList}>
+      <TodoForm />
+
+      <main id="todo-list" className={styles.todoList}>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />
         ))}

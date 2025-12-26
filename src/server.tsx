@@ -12,6 +12,30 @@ app.get('/', async (req: Request, res: Response) => {
   await req.ionbeam.renderPage("Daily Hub", <HomePage todos={db.data.todos} />);
 });
 
+app.post('/todos', async (req: Request, res: Response) => {
+  const { title } = req.body;
+
+  if (!title || title.trim() === '') {
+    res.status(400).send('Title is required');
+    return;
+  }
+
+  await db.read();
+
+  const newTodo = {
+    id: db.data.todos.length > 0
+      ? Math.max(...db.data.todos.map(t => t.id)) + 1
+      : 1,
+    title: title.trim(),
+    completed: false,
+  };
+
+  db.data.todos.push(newTodo);
+  await db.write();
+
+  await req.ionbeam.renderElement(<TodoItem todo={newTodo} />);
+});
+
 app.post('/todos/:id/toggle', async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
 

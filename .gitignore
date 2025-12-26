@@ -1,6 +1,9 @@
 # Build artifacts
 dist/
 
+# Data files
+data/
+
 # Dependencies
 node_modules/
 
