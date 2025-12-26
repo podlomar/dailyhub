@@ -1,0 +1,30 @@
+{
+  "name": "dailyhub",
+  "version": "1.0.0",
+  "description": "A server-side first web application built with IonBeam",
+  "type": "module",
+  "scripts": {
+    "dev": "ionbeam dev",
+    "build": "ionbeam build",
+    "start": "ionbeam start"
+  },
+  "keywords": [
+    "ionbeam",
+    "react",
+    "ssr",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1",
+    "ionbeam": "^1.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.9.3"
+  }
+}
