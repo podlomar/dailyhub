@@ -18,7 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^5.2.1",
-    "ionbeam": "^1.0.0-alpha.2"
+    "ionbeam": "^1.0.0-alpha.2",
+    "lowdb": "^7.0.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
