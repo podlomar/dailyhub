@@ -30,8 +30,8 @@
 
 .button {
   padding: 0.875rem 1.5rem;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #8B4000;
+  color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 0.95rem;
@@ -42,7 +42,7 @@
 }
 
 .button:hover {
-  background-color: #e0e0e0;
+  background-color: #A05200;
 }
 
 .button:active {
