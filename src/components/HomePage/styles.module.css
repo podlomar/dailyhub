@@ -1,10 +1,4 @@
-/* Container and Layout */
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
+/* Header */
 .header {
   text-align: center;
   margin-bottom: 3rem;

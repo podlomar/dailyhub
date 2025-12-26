@@ -1,4 +1,5 @@
 import { Page } from 'ionbeam';
+import { Container } from '../Container';
 import styles from './styles.module.css';
 
 interface Todo {
@@ -14,7 +15,7 @@ interface Props {
 export const HomePage = ({ todos }: Props) => {
   return (
     <Page title="Daily Hub">
-      <div className={styles.container}>
+      <Container>
         <header className={styles.header}>
           <h1>Daily Hub</h1>
           <p className={styles.subtitle}>Your everyday tasks</p>
@@ -33,7 +34,7 @@ export const HomePage = ({ todos }: Props) => {
             </div>
           ))}
         </main>
-      </div>
+      </Container>
     </Page>
   );
 };
