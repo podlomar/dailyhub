@@ -1,0 +1,81 @@
+/* Container and Layout */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+/* Todo List */
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.todoItem {
+  background-color: #000000;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.todoItem:hover {
+  border-color: #555;
+  transform: translateY(-1px);
+}
+
+.todoItem.completed {
+  opacity: 0.6;
+}
+
+.todoItem.completed .todoTitle {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todoCheckbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #000;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.todoItem.completed .todoCheckbox {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.todoTitle {
+  font-size: 1.05rem;
+  color: #ffffff;
+  flex: 1;
+}
