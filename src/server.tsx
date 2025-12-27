@@ -1,8 +1,10 @@
 import { createServer } from 'ionbeam';
 import type { Request, Response } from 'express';
 import { HomePage } from './components/HomePage';
+import { ShoppingPage } from './components/ShoppingPage';
 import { TodoItem } from './components/TodoItem';
-import { getTodos, addTodo, toggleTodo } from './db';
+import { ShoppingItem } from './components/ShoppingItem';
+import { getTodos, addTodo, toggleTodo, getShopping, toggleShoppingItem } from './db';
 import './global.css';
 
 const app = createServer();
@@ -32,6 +34,22 @@ app.post('/todos/:id/toggle', async (req: Request, res: Response) => {
     await req.ionbeam.renderElement(<TodoItem todo={todo} />);
   } else {
     res.status(404).send('Todo not found');
+  }
+});
+
+app.get('/shopping', async (req: Request, res: Response) => {
+  const shopping = await getShopping();
+  await req.ionbeam.renderPage("Shopping List", <ShoppingPage shopping={shopping} />);
+});
+
+app.post('/shopping/:id/toggle', async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const item = await toggleShoppingItem(id);
+
+  if (item) {
+    await req.ionbeam.renderElement(<ShoppingItem item={item} />);
+  } else {
+    res.status(404).send('Item not found');
   }
 });
 

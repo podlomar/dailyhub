@@ -10,8 +10,21 @@ export interface Todo {
   created: string;
 }
 
+export interface ShoppingItem {
+  id: string;
+  name: string;
+  quantity: number;
+  purchased: boolean;
+}
+
+export interface ShoppingCategory {
+  category: string;
+  items: ShoppingItem[];
+}
+
 export interface Database {
   todos: Todo[];
+  shopping: ShoppingCategory[];
 }
 
 export interface TodoList {
@@ -23,7 +36,7 @@ export interface TodoList {
 }
 
 const adapter = new JSONFile<Database>('data/todos.json');
-const db = new Low(adapter, { todos: [] });
+const db = new Low(adapter, { todos: [], shopping: [] });
 
 const sortUndoneFirst = (a: Todo, b: Todo): number => {
   if (a.completed === b.completed) {
@@ -96,6 +109,24 @@ export const toggleTodo = async (id: string): Promise<Todo | null> => {
     todo.completed = !todo.completed;
     await db.write();
     return todo;
+  }
+  return null;
+};
+
+export const getShopping = async (): Promise<ShoppingCategory[]> => {
+  await db.read();
+  return db.data.shopping || [];
+};
+
+export const toggleShoppingItem = async (id: string): Promise<ShoppingItem | null> => {
+  await db.read();
+  for (const category of db.data.shopping) {
+    const item = category.items.find(i => i.id === id);
+    if (item) {
+      item.purchased = !item.purchased;
+      await db.write();
+      return item;
+    }
   }
   return null;
 };
