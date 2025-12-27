@@ -5,7 +5,7 @@ export const TodoForm = () => {
     <form
       className={styles.form}
       hx-post="/todos"
-      hx-target="#todo-list"
+      hx-target="#today-todos"
       hx-swap="afterbegin"
       {...{
         'hx-on::after-request': "if(event.detail.successful) this.reset()"
