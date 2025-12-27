@@ -7,12 +7,13 @@ interface Props {
 
 export const ShoppingItem = ({ item }: Props) => {
   return (
-    <form
+    <div
       className={`${styles.shoppingItem} ${item.purchased ? styles.purchased : ''}`}
-      action={`/shopping/${item.id}/toggle`}
-      method="POST"
+      hx-post={`/shopping/${item.id}/toggle`}
+      hx-swap="outerHTML"
+      hx-trigger="click"
     >
-      <button type="submit" className={styles.shoppingCheckbox}>
+      <button className={styles.shoppingCheckbox}>
         {item.purchased ? '✓' : ''}
       </button>
       <div className={styles.itemInfo}>
@@ -21,6 +22,6 @@ export const ShoppingItem = ({ item }: Props) => {
           <span className={styles.itemQuantity}>× {item.quantity}</span>
         )}
       </div>
-    </form>
+    </div>
   );
 };
