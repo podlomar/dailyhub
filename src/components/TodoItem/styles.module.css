@@ -1,16 +1,19 @@
 .todoItem {
-  background-color: #000000;
-  border-radius: 6px;
-  padding: 0.875rem 1rem;
+  padding: 0.625rem 0;
   display: flex;
   align-items: start;
   gap: 0.75rem;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease;
   cursor: pointer;
+  border-bottom: 1px solid #444;
+}
+
+.todoItem:last-child {
+  border-bottom: none;
 }
 
 .todoItem:hover {
-  background-color: #0a0a0a;
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .todoItem.completed {
