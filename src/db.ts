@@ -25,6 +25,13 @@ export interface TodoList {
 const adapter = new JSONFile<Database>('data/todos.json');
 const db = new Low(adapter, { todos: [] });
 
+const sortUndoneFirst = (a: Todo, b: Todo): number => {
+  if (a.completed === b.completed) {
+    return 0;
+  }
+  return a.completed ? 1 : -1;
+};
+
 export const getTodos = async (): Promise<TodoList> => {
   await db.read();
   const todos = db.data.todos;
@@ -40,21 +47,32 @@ export const getTodos = async (): Promise<TodoList> => {
 
   for (const todo of todos) {
     const createdDate = dayjs(todo.created);
-    const diffDays = now.diff(createdDate, 'day');
+    const todayStart = now.startOf('day');
+    const threeDaysAgo = todayStart.subtract(3, 'day');
+    const sevenDaysAgo = todayStart.subtract(7, 'day');
+    const thirtyDaysAgo = todayStart.subtract(30, 'day');
 
-    if (diffDays === 0) {
+    if (createdDate.isAfter(todayStart)) {
       todoList.today.push(todo);
-    } else if (diffDays <= 3) {
+      continue;
+    }
+
+    if (todo.completed) {
+      continue;
+    }
+
+    if (createdDate.isAfter(threeDaysAgo)) {
       todoList.last3Days.push(todo);
-    } else if (diffDays <= 7) {
+    } else if (createdDate.isAfter(sevenDaysAgo)) {
       todoList.lastWeek.push(todo);
-    } else if (diffDays <= 30) {
+    } else if (createdDate.isAfter(thirtyDaysAgo)) {
       todoList.lastMonth.push(todo);
     } else {
       todoList.older.push(todo);
     }
   }
 
+  todoList.today.sort(sortUndoneFirst);
   return todoList;
 };
 
