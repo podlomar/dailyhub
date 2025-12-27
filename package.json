@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ionbeam dev",
     "build": "ionbeam build",
-    "start": "ionbeam start"
+    "start": "ionbeam start",
+    "deploy": "bash deploy/deploy.sh"
   },
   "keywords": [
     "ionbeam",
