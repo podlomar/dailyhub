@@ -1,4 +1,5 @@
 import { Container } from '../Container';
+import { Navigation } from '../Navigation';
 import { TodoForm } from '../TodoForm';
 import { TodoSection } from '../TodoSection';
 import type { TodoList } from '../../db';
@@ -15,6 +16,8 @@ export const HomePage = ({ todoList }: Props) => {
         <h1>Daily Hub</h1>
         <p className={styles.subtitle}>Your everyday tasks</p>
       </header>
+
+      <Navigation currentPage="home" />
 
       <TodoForm />
 

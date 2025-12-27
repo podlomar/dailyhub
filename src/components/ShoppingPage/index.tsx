@@ -1,4 +1,5 @@
 import { Container } from '../Container';
+import { Navigation } from '../Navigation';
 import { ShoppingSection } from '../ShoppingSection';
 import type { ShoppingCategory } from '../../db';
 import styles from './styles.module.css';
@@ -14,6 +15,8 @@ export const ShoppingPage = ({ shopping }: Props) => {
         <h1>Shopping List</h1>
         <p className={styles.subtitle}>Items to purchase</p>
       </header>
+
+      <Navigation currentPage="shopping" />
 
       <main className={styles.shoppingList}>
         {shopping.map((category) => (

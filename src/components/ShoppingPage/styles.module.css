@@ -16,6 +16,20 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+}
+
 /* Shopping List */
 .shoppingList {
   display: flex;
