@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 interface Props {
-  currentPage: 'home' | 'shopping';
+  currentPage: 'home' | 'shopping-list' | 'shopping';
 }
 
 export const Navigation = ({ currentPage }: Props) => {
@@ -12,6 +12,12 @@ export const Navigation = ({ currentPage }: Props) => {
         className={`${styles.navLink} ${currentPage === 'home' ? styles.active : ''}`}
       >
         Todos
+      </a>
+      <a
+        href="/shopping-list"
+        className={`${styles.navLink} ${currentPage === 'shopping-list' ? styles.active : ''}`}
+      >
+        List
       </a>
       <a
         href="/shopping"

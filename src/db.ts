@@ -118,6 +118,19 @@ export const getShopping = async (): Promise<ShoppingCategory[]> => {
   return db.data.shopping || [];
 };
 
+export const getShoppingList = async (): Promise<ShoppingItem[]> => {
+  await db.read();
+  const shoppingList: ShoppingItem[] = [];
+  for (const category of db.data.shopping) {
+    for (const item of category.items) {
+      if (item.purchased) {
+        shoppingList.push(item);
+      }
+    }
+  }
+  return shoppingList;
+};
+
 export const toggleShoppingItem = async (id: string): Promise<ShoppingItem | null> => {
   await db.read();
   for (const category of db.data.shopping) {

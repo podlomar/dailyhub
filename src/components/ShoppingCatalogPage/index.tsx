@@ -8,12 +8,12 @@ interface Props {
   shopping: ShoppingCategory[];
 }
 
-export const ShoppingPage = ({ shopping }: Props) => {
+export const ShoppingCatalogPage = ({ shopping }: Props) => {
   return (
     <Container>
       <header className={styles.header}>
-        <h1>Shopping List</h1>
-        <p className={styles.subtitle}>Items to purchase</p>
+        <h1>Shopping</h1>
+        <p className={styles.subtitle}>All available items</p>
       </header>
 
       <Navigation currentPage="shopping" />

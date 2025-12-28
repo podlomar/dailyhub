@@ -1,10 +1,11 @@
 import { createServer } from 'ionbeam';
 import type { Request, Response } from 'express';
 import { HomePage } from './components/HomePage';
-import { ShoppingPage } from './components/ShoppingPage';
+import { ShoppingListPage } from './components/ShoppingListPage';
+import { ShoppingCatalogPage } from './components/ShoppingCatalogPage';
 import { TodoItem } from './components/TodoItem';
 import { ShoppingItem } from './components/ShoppingItem';
-import { getTodos, addTodo, toggleTodo, getShopping, toggleShoppingItem } from './db';
+import { getTodos, addTodo, toggleTodo, getShopping, getShoppingList, toggleShoppingItem } from './db';
 import './global.css';
 
 const app = createServer();
@@ -37,9 +38,14 @@ app.post('/todos/:id/toggle', async (req: Request, res: Response) => {
   }
 });
 
+app.get('/shopping-list', async (req: Request, res: Response) => {
+  const shoppingList = await getShoppingList();
+  await req.ionbeam.renderPage("Shopping List", <ShoppingListPage shoppingList={shoppingList} />);
+});
+
 app.get('/shopping', async (req: Request, res: Response) => {
   const shopping = await getShopping();
-  await req.ionbeam.renderPage("Shopping List", <ShoppingPage shopping={shopping} />);
+  await req.ionbeam.renderPage("Shopping", <ShoppingCatalogPage shopping={shopping} />);
 });
 
 app.post('/shopping/:id/toggle', async (req: Request, res: Response) => {
