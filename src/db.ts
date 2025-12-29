@@ -131,6 +131,28 @@ export const getShoppingList = async (): Promise<ShoppingItem[]> => {
   return shoppingList;
 };
 
+export const addShoppingItem = async (name: string, quantity: number): Promise<ShoppingItem> => {
+  await db.read();
+
+  // Create new item and add it to "Other" category (or create the category if it doesn't exist)
+  const newItem: ShoppingItem = {
+    id: nanoid(8),
+    name,
+    quantity,
+    purchased: true, // Auto-add to shopping list
+  };
+
+  let otherCategory = db.data.shopping.find(cat => cat.category === 'Other');
+  if (!otherCategory) {
+    otherCategory = { category: 'Other', items: [] };
+    db.data.shopping.push(otherCategory);
+  }
+
+  otherCategory.items.push(newItem);
+  await db.write();
+  return newItem;
+};
+
 export const toggleShoppingItem = async (id: string): Promise<ShoppingItem | null> => {
   await db.read();
   for (const category of db.data.shopping) {
