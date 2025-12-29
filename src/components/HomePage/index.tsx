@@ -22,7 +22,7 @@ export const HomePage = ({ todoList }: Props) => {
       <TodoForm />
 
       <main id="todo-list" className={styles.todoList}>
-        <TodoSection todosSlot="today-todos" title="Today" todos={todoList.today} />
+        <TodoSection allowEmpty todosSlot="today-todos" title="Today" todos={todoList.today} />
         <TodoSection title="Last 3 Days" todos={todoList.last3Days} />
         <TodoSection title="Last Week" todos={todoList.lastWeek} />
         <TodoSection title="Last Month" todos={todoList.lastMonth} />

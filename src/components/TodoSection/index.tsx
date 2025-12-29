@@ -6,10 +6,11 @@ interface Props {
   todosSlot?: string;
   title: string;
   todos: Todo[];
+  allowEmpty?: boolean;
 }
 
-export const TodoSection = ({ todosSlot, title, todos }: Props) => {
-  if (todos.length === 0) return null;
+export const TodoSection = ({ todosSlot, title, todos, allowEmpty }: Props) => {
+  if (todos.length === 0 && !allowEmpty) return null;
 
   return (
     <section className={styles.section}>
