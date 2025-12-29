@@ -1,15 +1,15 @@
-import type { ShoppingItem as ShoppingItemType } from '../../db';
+import type { ShoppingItem } from '../../db';
 import styles from './styles.module.css';
 
 interface Props {
-  item: ShoppingItemType;
+  item: ShoppingItem;
 }
 
-export const ShoppingItem = ({ item }: Props) => {
+export const ShoppingItemView = ({ item }: Props) => {
   return (
     <div
       className={`${styles.shoppingItem} ${item.purchased ? styles.purchased : ''}`}
-      hx-post={`/shopping/${item.id}/toggle`}
+      hx-post={`/shopping-list/${item.id}/toggle`}
       hx-swap="outerHTML"
       hx-trigger="click"
     >

@@ -5,8 +5,8 @@ export const ShoppingListForm = () => {
     <form
       className={styles.form}
       hx-post="/shopping-list/items"
-      hx-target="#shopping-list-items"
-      hx-swap="afterbegin"
+      hx-target="#shopping-list"
+      hx-swap="outerHTML"
       {...{
         'hx-on::after-request': "if(event.detail.successful) this.reset()"
       }}

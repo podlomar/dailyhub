@@ -17,14 +17,21 @@ export interface ShoppingItem {
   purchased: boolean;
 }
 
-export interface ShoppingCategory {
+export interface HouseholdItem {
+  id: string;
+  name: string;
+  isOut: boolean;
+}
+
+export interface HouseholdCategory {
   category: string;
-  items: ShoppingItem[];
+  items: HouseholdItem[];
 }
 
 export interface Database {
   todos: Todo[];
-  shopping: ShoppingCategory[];
+  shoppingList: ShoppingItem[];
+  household: HouseholdCategory[];
 }
 
 export interface TodoList {
@@ -35,8 +42,12 @@ export interface TodoList {
   older: Todo[];
 }
 
-const adapter = new JSONFile<Database>('data/todos.json');
-const db = new Low(adapter, { todos: [], shopping: [] });
+const adapter = new JSONFile<Database>('data/database.json');
+const db = new Low(adapter, {
+  todos: [],
+  shoppingList: [],
+  household: []
+});
 
 const sortUndoneFirst = (a: Todo, b: Todo): number => {
   if (a.completed === b.completed) {
@@ -113,51 +124,35 @@ export const toggleTodo = async (id: string): Promise<Todo | null> => {
   return null;
 };
 
-export const getShopping = async (): Promise<ShoppingCategory[]> => {
+export const getHousehold = async (): Promise<HouseholdCategory[]> => {
   await db.read();
-  return db.data.shopping || [];
+  return db.data.household ?? [];
 };
 
 export const getShoppingList = async (): Promise<ShoppingItem[]> => {
   await db.read();
-  const shoppingList: ShoppingItem[] = [];
-  for (const category of db.data.shopping) {
-    for (const item of category.items) {
-      if (item.purchased) {
-        shoppingList.push(item);
-      }
-    }
-  }
-  return shoppingList;
+  return db.data.shoppingList ?? [];
 };
 
 export const addShoppingItem = async (name: string, quantity: number): Promise<ShoppingItem> => {
   await db.read();
 
-  // Create new item and add it to "Other" category (or create the category if it doesn't exist)
   const newItem: ShoppingItem = {
     id: nanoid(8),
     name,
     quantity,
-    purchased: true, // Auto-add to shopping list
+    purchased: false,
   };
 
-  let otherCategory = db.data.shopping.find(cat => cat.category === 'Other');
-  if (!otherCategory) {
-    otherCategory = { category: 'Other', items: [] };
-    db.data.shopping.push(otherCategory);
-  }
-
-  otherCategory.items.push(newItem);
+  db.data.shoppingList.push(newItem);
   await db.write();
   return newItem;
 };
 
 export const toggleShoppingItem = async (id: string): Promise<ShoppingItem | null> => {
   await db.read();
-  for (const category of db.data.shopping) {
-    const item = category.items.find(i => i.id === id);
-    if (item) {
+  for (const item of db.data.shoppingList) {
+    if (item.id === id) {
       item.purchased = !item.purchased;
       await db.write();
       return item;

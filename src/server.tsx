@@ -2,11 +2,12 @@ import { createServer } from 'ionbeam';
 import type { Request, Response } from 'express';
 import { HomePage } from './components/HomePage';
 import { ShoppingListPage } from './components/ShoppingListPage';
-import { ShoppingCatalogPage } from './components/ShoppingCatalogPage';
+import { HouseholdPage } from './components/HouseholdPage';
 import { TodoItem } from './components/TodoItem';
-import { ShoppingItem } from './components/ShoppingItem';
-import { getTodos, addTodo, toggleTodo, getShopping, getShoppingList, addShoppingItem, toggleShoppingItem } from './db';
+import { ShoppingItemView } from './components/ShoppingItemView';
+import { getTodos, addTodo, toggleTodo, getHousehold, getShoppingList, addShoppingItem, toggleShoppingItem } from './db';
 import './global.css';
+import { ShoppingList } from './components/ShoppingList';
 
 const app = createServer();
 
@@ -52,24 +53,25 @@ app.post('/shopping-list/items', async (req: Request, res: Response) => {
   }
 
   const qty = parseInt(quantity) || 1;
-  const newItem = await addShoppingItem(name.trim(), qty);
-  await req.ionbeam.renderElement(<ShoppingItem item={newItem} />);
+  await addShoppingItem(name.trim(), qty);
+  const items = await getShoppingList();
+  await req.ionbeam.renderElement(<ShoppingList shoppingList={items} />);
 });
 
-app.get('/shopping', async (req: Request, res: Response) => {
-  const shopping = await getShopping();
-  await req.ionbeam.renderPage("Shopping", <ShoppingCatalogPage shopping={shopping} />);
-});
-
-app.post('/shopping/:id/toggle', async (req: Request, res: Response) => {
+app.post('/shopping-list/:id/toggle', async (req: Request, res: Response) => {
   const id = req.params.id;
   const item = await toggleShoppingItem(id);
 
   if (item) {
-    await req.ionbeam.renderElement(<ShoppingItem item={item} />);
+    await req.ionbeam.renderElement(<ShoppingItemView item={item} />);
   } else {
     res.status(404).send('Item not found');
   }
+});
+
+app.get('/household', async (req: Request, res: Response) => {
+  const household = await getHousehold();
+  await req.ionbeam.renderPage("Household", <HouseholdPage household={household} />);
 });
 
 const PORT = process.env.PORT || 3000;
