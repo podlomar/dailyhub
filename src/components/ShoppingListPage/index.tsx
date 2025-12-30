@@ -10,6 +10,8 @@ interface Props {
 }
 
 export const ShoppingListPage = ({ shoppingList }: Props) => {
+  const hasPurchasedItems = shoppingList.some(item => item.purchased);
+
   return (
     <Container>
       <header className={styles.header}>
@@ -22,6 +24,15 @@ export const ShoppingListPage = ({ shoppingList }: Props) => {
       <ShoppingListForm />
 
       <ShoppingList shoppingList={shoppingList} />
+      <button
+        className={styles.clearButton}
+        disabled={!hasPurchasedItems}
+        hx-post="/shopping-list/clear-purchased"
+        hx-target="#shopping-list"
+        hx-swap="outerHTML"
+      >
+        Clear Purchased
+      </button>
     </Container>
   );
 };

@@ -5,7 +5,7 @@ import { ShoppingListPage } from './components/ShoppingListPage';
 import { HouseholdPage } from './components/HouseholdPage';
 import { TodoItem } from './components/TodoItem';
 import { ShoppingItemView } from './components/ShoppingItemView';
-import { getTodos, addTodo, toggleTodo, getHousehold, getShoppingList, addShoppingItem, toggleShoppingItem } from './db';
+import { getTodos, addTodo, toggleTodo, getHousehold, getShoppingList, addShoppingItem, toggleShoppingItem, clearPurchasedItems } from './db';
 import './global.css';
 import { ShoppingList } from './components/ShoppingList';
 
@@ -67,6 +67,12 @@ app.post('/shopping-list/:id/toggle', async (req: Request, res: Response) => {
   } else {
     res.status(404).send('Item not found');
   }
+});
+
+app.post('/shopping-list/clear-purchased', async (req: Request, res: Response) => {
+  await clearPurchasedItems();
+  const items = await getShoppingList();
+  await req.ionbeam.renderElement(<ShoppingList shoppingList={items} />);
 });
 
 app.get('/household', async (req: Request, res: Response) => {

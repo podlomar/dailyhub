@@ -160,3 +160,9 @@ export const toggleShoppingItem = async (id: string): Promise<ShoppingItem | nul
   }
   return null;
 };
+
+export const clearPurchasedItems = async (): Promise<void> => {
+  await db.read();
+  db.data.shoppingList = db.data.shoppingList.filter(item => !item.purchased);
+  await db.write();
+};
